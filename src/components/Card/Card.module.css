@@ -1,0 +1,15 @@
+.card {
+  width: 80vw;
+  border-radius: 6px;
+  padding: 2rem;
+  margin: 1rem;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    width: 60vw;
+    max-width: 60vw;
+  }
+}
