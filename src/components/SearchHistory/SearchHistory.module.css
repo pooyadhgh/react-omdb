@@ -1,0 +1,16 @@
+h2 {
+  font-weight: 500;
+  line-height: 1.2;
+  color: #212529;
+}
+
+.button {
+  display: block;
+  margin-left: auto;
+  background-color: #da292e;
+}
+
+.button:hover {
+  background-color: #b92327;
+  border-color: #b92327;
+}

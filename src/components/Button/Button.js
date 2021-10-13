@@ -1,7 +1,15 @@
 import classes from './Button.module.css';
 import { Link } from 'react-router-dom';
 
-const Button = ({ href, children, className, type, onClick, disabled, to }) => {
+const Button = ({
+  href,
+  children,
+  className = '',
+  type,
+  onClick,
+  disabled,
+  to,
+}) => {
   if (href) {
     return (
       <button className={`${classes.button} ${className}`}>
