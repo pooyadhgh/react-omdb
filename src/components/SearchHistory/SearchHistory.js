@@ -2,7 +2,7 @@ import Card from '../Card/Card';
 import Button from '../Button/Button';
 import classes from './SearchHistory.module.css';
 
-const SearchHistory = ({ histories, clearHistory }) => {
+const SearchHistory = ({ histories, onClear }) => {
   return (
     <Card>
       <h2>Search history</h2>
@@ -15,7 +15,7 @@ const SearchHistory = ({ histories, clearHistory }) => {
           );
         })}
       </ul>
-      <Button onClick={clearHistory} className={classes.button}>
+      <Button onClick={onClear} className={classes.button}>
         Clear
       </Button>
     </Card>

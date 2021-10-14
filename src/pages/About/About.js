@@ -1,5 +1,4 @@
 import Card from '../../components/Card/Card';
-import './About.module.css';
 const About = () => {
   return (
     <Card>
