@@ -8,3 +8,47 @@
   background-color: #b92327;
   border-color: #b92327;
 }
+
+.search-history {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.search-history__item {
+  margin: 0.25rem;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.search-history__item__title {
+  margin-right: auto;
+  color: #3459e6;
+}
+.search-history__item__title:hover {
+  margin-right: auto;
+  text-decoration: underline #3459e6;
+  cursor: pointer;
+}
+
+.search-history__item button {
+  cursor: pointer;
+  width: auto;
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  outline: none;
+  margin: 0 0.5rem;
+  font-weight: 600;
+  line-height: inherit;
+}
+
+.search-history__item button:hover {
+  background-color: #d3d3d3;
+  border: 1px solid #d3d3d3;
+  border-radius: 3px;
+}

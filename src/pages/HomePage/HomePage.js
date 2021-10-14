@@ -9,14 +9,12 @@ const HomePage = () => {
 
   // Save search result to history and show it
   const saveSearchHandler = item => {
-    const date = new Date();
     const newHistory = {
-      date: date.toString(),
-      item: item,
+      date: Date.now(),
+      ...item,
     };
-
     setHistories(history => [...history, newHistory]);
-    setSelectedResult(item.imdbID);
+    setSelectedResult(item);
   };
 
   // Clear all histories
@@ -24,12 +22,26 @@ const HomePage = () => {
     setHistories([]);
   };
 
+  const itemDeleteHandler = id => {
+    const updatedHistories = histories.filter(item => item.imdbID !== id);
+    setHistories(updatedHistories);
+  };
+
+  const itemClickHandler = item => {
+    setSelectedResult(item);
+  };
+
   return (
     <>
       <SearchBox onSearchItemClick={saveSearchHandler} />
 
       {histories.length > 0 && (
-        <SearchHistory histories={histories} onClear={clearHistoryHandler} />
+        <SearchHistory
+          histories={histories}
+          onClear={clearHistoryHandler}
+          onClickItem={itemClickHandler}
+          onDeleteItem={itemDeleteHandler}
+        />
       )}
 
       {selectedResult.length !== 0 && <SearchResult item={selectedResult} />}

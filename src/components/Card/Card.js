@@ -1,7 +1,9 @@
 import classes from './Card.module.css';
 
 const Card = ({ children, className }) => {
-  return <div className={`${classes.card} ${className}`}>{children}</div>;
+  return (
+    <section className={`${classes.card} ${className}`}>{children}</section>
+  );
 };
 
 export default Card;
