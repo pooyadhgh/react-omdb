@@ -1,5 +1,4 @@
 import classes from './Button.module.css';
-import { Link } from 'react-router-dom';
 
 const Button = ({
   href,
@@ -8,7 +7,6 @@ const Button = ({
   type,
   onClick,
   disabled,
-  to,
 }) => {
   if (href) {
     return (
@@ -23,13 +21,6 @@ const Button = ({
     );
   }
 
-  if (to) {
-    return (
-      <Link to={to} className={`${classes.button} ${className}`}>
-        {children}
-      </Link>
-    );
-  }
   return (
     <button
       className={`${classes.button} ${className} `}
