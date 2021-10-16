@@ -53,7 +53,8 @@ const SearchBox = ({ onSearchItemClick }) => {
 
   useEffect(() => {
     inputRef.current.focus();
-    // Call API if entered keyword is greater than 3
+
+    // Call API if entered keyword is greater than 3 words
     const searchHandler = async keyword => {
       if (keyword.trim().length < 3) return;
       dispatch({ type: 'SEARCH_REQUEST' });
@@ -103,6 +104,7 @@ const SearchBox = ({ onSearchItemClick }) => {
         <label className={classes['form-control__label']}>
           Enter a keyword
         </label>
+
         <input
           ref={inputRef}
           className={`${classes['form-control__input']} ${
@@ -115,45 +117,59 @@ const SearchBox = ({ onSearchItemClick }) => {
           value={state.value}
           onChange={valueChangeHandler}
           onKeyDown={event => {
+            // Handle pressing escape key
             if (event.keyCode === 27) {
               toggleResultsHandler(false);
             }
           }}
-          // onBlur={() => {
-          //   setTimeout(() => {
-          //     setVisibility(false);
-          //   }, 100);
-          // }}
           onFocus={() => {
             toggleResultsHandler(true);
           }}
         />
+        <i
+          className={`fas fa-search ${classes['form-control__input__icon']}`}
+        ></i>
 
         {state.loading && <Loading />}
 
         {state.showResults && state.searchResults.length > 0 && (
-          <ul className={classes['form-control__list']}>
-            {state.searchResults.map((item, index) => {
-              return (
-                <li
-                  tabIndex={index + 1}
-                  key={index}
-                  value={item.Title}
-                  onClick={() => searchItemClickHandler(item)}
-                  onKeyDown={event => {
-                    if (event.keyCode === 13) {
-                      searchItemClickHandler(item);
-                    }
-                  }}
-                >
-                  {item.Poster !== 'N/A' && (
-                    <img src={item.Poster} alt={item.Title} />
-                  )}
-                  {item.Title}
-                </li>
-              );
-            })}
-          </ul>
+          <section className={classes['form-control__list']}>
+            <div className={classes['form-control__list__suggestion']}>
+              Suggestions:
+              <button tabIndex={1} onClick={() => toggleResultsHandler(false)}>
+                <i className="fas fa-times"></i>
+                Clear
+              </button>
+            </div>
+            <ul>
+              {state.searchResults.map((item, index) => {
+                return (
+                  <li
+                    tabIndex={index + 2}
+                    key={index}
+                    value={item.Title}
+                    onClick={() => searchItemClickHandler(item)}
+                    onKeyDown={event => {
+                      // Handle pressing enter key
+                      if (event.keyCode === 13) {
+                        searchItemClickHandler(item);
+                      }
+                      if (event.keyCode === 27) {
+                        toggleResultsHandler(false);
+                      }
+                    }}
+                  >
+                    {item.Poster !== 'N/A' && (
+                      <figure>
+                        <img src={item.Poster} alt={item.Title} />{' '}
+                      </figure>
+                    )}
+                    {item.Title}
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
         )}
 
         {state.notFound && (

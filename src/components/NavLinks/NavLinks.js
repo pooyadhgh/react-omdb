@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import classes from './NavLinks.module.css';
 
 const NavLinks = () => {
@@ -19,9 +18,6 @@ const NavLinks = () => {
             : `${classes['nav-links']}`
         }
       >
-        <li>
-          <NavLink to="/about">About</NavLink>
-        </li>
         <li>
           <a
             href="https://github.com/pooyadhgh/React-Redux-OMDB"

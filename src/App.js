@@ -1,21 +1,54 @@
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { useState } from 'react';
 import Layout from './components/Layout/Layout';
-import About from './pages/About/About';
-import HomePage from './pages/HomePage/HomePage';
-// import Item from './pages/Item/Item';
+import SearchResult from './components/SearchResult/SearchResult';
+import SearchHistory from './components/SearchHistory/SearchHistory';
+import SearchBox from './components/SearchBox/SearchBox';
 
 const App = () => {
+  const [histories, setHistories] = useState([]);
+  const [selectedResult, setSelectedResult] = useState('');
+
+  // Save search result to history and show it
+  const saveSearchHandler = item => {
+    const newHistory = {
+      date: Date.now(),
+      ...item,
+    };
+    setHistories(history => [...history, newHistory]);
+    setSelectedResult(item);
+  };
+
+  // Clear all histories
+  const clearHistoryHandler = () => {
+    setHistories([]);
+  };
+
+  // Remove an item from search histories
+  const itemDeleteHandler = id => {
+    const updatedHistories = histories.filter(item => item.imdbID !== id);
+    setHistories(updatedHistories);
+  };
+
+  // Select an item and display in results section
+  const itemClickHandler = item => {
+    setSelectedResult(item);
+  };
+
   return (
-    <Router>
-      <Layout>
-        <Route path="/" component={HomePage} exact />
-        {/* <Route path="/item/:id" component={Item} /> */}
-        <Route path="/about" component={About} />
-        <Route path="*">
-          <Redirect to="/" />
-        </Route>
-      </Layout>
-    </Router>
+    <Layout>
+      <SearchBox onSearchItemClick={saveSearchHandler} />
+
+      {histories.length > 0 && (
+        <SearchHistory
+          histories={histories}
+          onClear={clearHistoryHandler}
+          onClickItem={itemClickHandler}
+          onDeleteItem={itemDeleteHandler}
+        />
+      )}
+
+      {selectedResult.length !== 0 && <SearchResult item={selectedResult} />}
+    </Layout>
   );
 };
 

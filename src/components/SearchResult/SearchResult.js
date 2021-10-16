@@ -6,9 +6,13 @@ const SearchResult = ({ item }) => {
   return (
     <Card>
       <h2>Search result</h2>
-      <section className={classes.info}>
-        {item.Poster !== 'N/A' && <img src={item.Poster} alt={item.Title} />}
-        <section className={classes['item__info']}>
+      <section className={classes['result-info']}>
+        {item.Poster !== 'N/A' && (
+          <figure>
+            <img src={item.Poster} alt={item.Title} />
+          </figure>
+        )}
+        <section className={classes['result-info__item']}>
           <h3>{item.Title}</h3>
           <ul>
             <li>
@@ -17,7 +21,7 @@ const SearchResult = ({ item }) => {
               {item.Type}
             </li>
             <li>
-              <i className="fas fa-history"></i>
+              <i className="far fa-calendar-alt"></i>
               <span>Year:</span>
               {item.Year}
             </li>
