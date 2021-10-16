@@ -24,6 +24,7 @@ const reducer = (state, action) => {
         ...state,
         notFound: false,
         loading: false,
+        error: '',
         searchResults: action.payload,
       };
     case 'SEARCH_FAILED':
@@ -170,6 +171,12 @@ const SearchBox = ({ onSearchItemClick }) => {
               })}
             </ul>
           </section>
+        )}
+
+        {state.error && (
+          <p className={classes.error}>
+            Something went wrong. Please try again.
+          </p>
         )}
 
         {state.notFound && (
