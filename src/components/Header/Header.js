@@ -5,7 +5,7 @@ import NavLinks from '../NavLinks/NavLinks';
 const Header = () => {
   return (
     <header className={classes.header}>
-      <h1>
+      <h1 className={classes.brand}>
         <Link to="/">The Open Movie Database</Link>
       </h1>
       <nav className={classes['nav-bar']}>

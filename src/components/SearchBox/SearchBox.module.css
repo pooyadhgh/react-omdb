@@ -73,9 +73,13 @@
   margin-right: 0.25rem;
 }
 
-.form-control__list li:hover {
+.form-control__list li:hover,
+.form-control__list li:focus {
   cursor: pointer;
   background-color: #ced4da;
+  outline: none;
+  border: 1px solid #ced4da;
+  border-radius: 0.3rem;
 }
 
 .error {

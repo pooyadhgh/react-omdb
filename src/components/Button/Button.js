@@ -12,9 +12,14 @@ const Button = ({
 }) => {
   if (href) {
     return (
-      <button className={`${classes.button} ${className}`}>
-        <a href={href}>{children}</a>
-      </button>
+      <a
+        href={href}
+        className={`${classes.button} ${className}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
     );
   }
 

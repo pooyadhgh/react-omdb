@@ -1,19 +1,32 @@
-h1 a {
+.brand {
   color: #fff;
+  border-radius: 0.25rem;
+  margin-right: 1rem;
   font-size: 1rem;
   text-decoration: none;
-  display: block;
-  height: 3rem;
-  margin: 1rem 1rem 0 0;
+}
+
+.brand a {
+  color: #fff;
+  padding: 0.5rem;
+}
+
+.brand a:focus {
+  outline: auto;
+  outline-color: #495057;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
 }
 
 .header {
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 1.5rem 0.5rem;
   background-color: #3459e6;
   color: #fff;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -23,6 +36,7 @@ h1 a {
   .header {
     flex-direction: row;
     align-items: center;
+    height: 5rem;
   }
 
   .nav-bar {

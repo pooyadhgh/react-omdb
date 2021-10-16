@@ -119,12 +119,14 @@ const SearchBox = ({ onSearchItemClick }) => {
               toggleResultsHandler(false);
             }
           }}
-          onBlur={() => {
-            setTimeout(() => {
-              toggleResultsHandler(false);
-            }, 100);
+          // onBlur={() => {
+          //   setTimeout(() => {
+          //     setVisibility(false);
+          //   }, 100);
+          // }}
+          onFocus={() => {
+            toggleResultsHandler(true);
           }}
-          onFocus={() => toggleResultsHandler(true)}
         />
 
         {state.loading && <Loading />}
@@ -134,6 +136,7 @@ const SearchBox = ({ onSearchItemClick }) => {
             {state.searchResults.map((item, index) => {
               return (
                 <li
+                  tabIndex={index + 1}
                   key={index}
                   value={item.Title}
                   onClick={() => searchItemClickHandler(item)}

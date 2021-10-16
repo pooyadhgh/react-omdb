@@ -21,7 +21,7 @@ const SearchHistory = ({ histories, onClear, onDeleteItem, onClickItem }) => {
     <Card>
       <h2>Search history</h2>
       <section className={classes['search-history']}>
-        {histories.map(history => {
+        {histories.map((history, index) => {
           return (
             <div
               className={classes['search-history__item']}
@@ -30,6 +30,12 @@ const SearchHistory = ({ histories, onClear, onDeleteItem, onClickItem }) => {
               <h3
                 className={classes['search-history__item__title']}
                 onClick={() => onClickItem(history)}
+                tabIndex={index}
+                onKeyDown={event => {
+                  if (event.keyCode === 13) {
+                    onClickItem(history);
+                  }
+                }}
               >
                 {history.Title}
               </h3>

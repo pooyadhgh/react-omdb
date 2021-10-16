@@ -27,6 +27,15 @@
   color: #fff;
 }
 
+.nav-links a:focus {
+  outline: auto;
+  outline-color: #495057;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  color: #fff;
+}
+
 .nav-links__show {
   display: flex;
 }

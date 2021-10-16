@@ -29,7 +29,10 @@ const SearchResult = ({ item }) => {
           </ul>
         </section>
       </section>
-      <Button className={classes.button} to={`/item/${item.imdbID}`}>
+      <Button
+        className={classes.button}
+        href={`https://www.imdb.com/title/${item.imdbID}`}
+      >
         Detail
       </Button>
     </Card>

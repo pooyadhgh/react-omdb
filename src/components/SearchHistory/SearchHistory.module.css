@@ -4,7 +4,8 @@
   background-color: #da292e;
 }
 
-.button:hover {
+.button:hover,
+.button:focus {
   background-color: #b92327;
   border-color: #b92327;
 }
@@ -29,10 +30,18 @@
   margin-right: auto;
   color: #3459e6;
 }
+
 .search-history__item__title:hover {
   margin-right: auto;
   text-decoration: underline #3459e6;
   cursor: pointer;
+}
+
+.search-history__item__title:focus {
+  outline-color: #d3d3d3;
+  outline-width: 0.25rem;
+  padding: 0.25rem;
+  background-color: #d3d3d3;
 }
 
 .search-history__item button {
@@ -51,4 +60,11 @@
   background-color: #d3d3d3;
   border: 1px solid #d3d3d3;
   border-radius: 3px;
+}
+
+.search-history__item button:focus {
+  background-color: #d3d3d3;
+  outline: auto;
+  outline-color: #495057;
+  outline-width: 0.25rem;
 }
