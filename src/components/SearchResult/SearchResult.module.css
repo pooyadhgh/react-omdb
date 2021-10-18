@@ -34,13 +34,13 @@
 
 .result-info img {
   max-width: 10rem;
+  margin-right: 1rem;
 }
 
 .result-info__item {
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
-  margin-left: 1rem;
   flex-wrap: wrap;
 }
 
@@ -49,6 +49,6 @@
     margin: 2rem;
   }
   .result-info__item {
-    margin: 2rem;
+    margin: 2rem 0;
   }
 }

@@ -4,6 +4,15 @@ import useDebounce from '../../hooks/use-debounce';
 import Loading from '../Loading/Loading';
 import classes from './SearchBox.module.css';
 
+const VALUE_ONCHANGE = 'VALUE_ONCHANGE';
+const SEARCH_REQUEST = 'SEARCH_REQUEST';
+const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
+const SEARCH_FAILED = 'SEARCH_FAILED';
+const SEARCH_NOTFOUND = 'SEARCH_NOTFOUND';
+const TOGGLE_SHOW_RESULTS = 'TOGGLE_SHOW_RESULTS';
+const RESET_RESULTS = 'RESET_RESULTS';
+const RESET_VALUE = 'RESET_VALUE';
+
 const initialState = {
   value: '',
   searchResults: [],
@@ -15,11 +24,11 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'VALUE_ONCHANGE':
-      return { ...state, showResults: true, value: action.payload };
-    case 'SEARCH_REQUEST':
+    case VALUE_ONCHANGE:
+      return { ...state, showResults: true, error: '', value: action.payload };
+    case SEARCH_REQUEST:
       return { ...state, loading: true };
-    case 'SEARCH_SUCCESS':
+    case SEARCH_SUCCESS:
       return {
         ...state,
         notFound: false,
@@ -27,19 +36,19 @@ const reducer = (state, action) => {
         error: '',
         searchResults: action.payload,
       };
-    case 'SEARCH_FAILED':
+    case SEARCH_FAILED:
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
-    case 'SEARCH_NOTFOUND':
+    case SEARCH_NOTFOUND:
       return { ...state, loading: false, notFound: true };
-    case 'TOGGLE_SHOW_RESULTS':
+    case TOGGLE_SHOW_RESULTS:
       return { ...state, showResults: action.payload };
-    case 'RESET_RESULTS':
+    case RESET_RESULTS:
       return { ...state, searchResults: [], notFound: false };
-    case 'RESET_VALUE':
+    case RESET_VALUE:
       return { ...state, value: '' };
 
     default:
@@ -58,20 +67,22 @@ const SearchBox = ({ onSearchItemClick }) => {
     // Call API if entered keyword is greater than 3 words
     const searchHandler = async keyword => {
       if (keyword.trim().length < 3) return;
-      dispatch({ type: 'SEARCH_REQUEST' });
+      dispatch({ type: SEARCH_REQUEST });
       try {
-        const { data } = await api.getData({ s: keyword.trim().toLowerCase() });
+        const { data } = await api.getData({
+          s: keyword.trim(),
+        });
 
         // Check if request has any results or not
         if (data.Response === 'False') {
-          dispatch({ type: 'SEARCH_NOTFOUND' });
+          dispatch({ type: SEARCH_NOTFOUND });
           return;
         }
 
         // Save request data to state
-        dispatch({ type: 'SEARCH_SUCCESS', payload: data.Search });
+        dispatch({ type: SEARCH_SUCCESS, payload: data.Search });
       } catch (error) {
-        dispatch({ type: 'SEARCH_FAILED', payload: error });
+        dispatch({ type: SEARCH_FAILED, payload: error });
       }
     };
 
@@ -80,20 +91,20 @@ const SearchBox = ({ onSearchItemClick }) => {
 
   // Input onChange handler
   const valueChangeHandler = event => {
-    dispatch({ type: 'VALUE_ONCHANGE', payload: event.target.value });
-    dispatch({ type: 'RESET_RESULTS' });
+    dispatch({ type: VALUE_ONCHANGE, payload: event.target.value.toString() });
+    dispatch({ type: RESET_RESULTS });
   };
 
   const searchItemClickHandler = item => {
     // Get function from props
     onSearchItemClick(item);
 
-    dispatch({ type: 'RESET_RESULTS' });
-    dispatch({ type: 'RESET_VALUE' });
+    dispatch({ type: RESET_RESULTS });
+    dispatch({ type: RESET_VALUE });
   };
 
   const toggleResultsHandler = isShowResult => {
-    dispatch({ type: 'TOGGLE_SHOW_RESULTS', payload: isShowResult });
+    dispatch({ type: TOGGLE_SHOW_RESULTS, payload: isShowResult });
   };
 
   return (
@@ -102,7 +113,7 @@ const SearchBox = ({ onSearchItemClick }) => {
         className={classes['form-control']}
         onSubmit={event => event.preventDefault()}
       >
-        <label className={classes['form-control__label']}>
+        <label for="keyword" className={classes['form-control__label']}>
           Enter a keyword
         </label>
 
@@ -126,10 +137,12 @@ const SearchBox = ({ onSearchItemClick }) => {
           onFocus={() => {
             toggleResultsHandler(true);
           }}
+          required
+          minLength="3"
         />
-        <i
+        <span
           className={`fas fa-search ${classes['form-control__input__icon']}`}
-        ></i>
+        ></span>
 
         {state.loading && <Loading />}
 
@@ -160,9 +173,21 @@ const SearchBox = ({ onSearchItemClick }) => {
                       }
                     }}
                   >
-                    {item.Poster !== 'N/A' && (
+                    {item.Poster !== 'N/A' ? (
                       <figure>
-                        <img src={item.Poster} alt={item.Title} />{' '}
+                        <img
+                          src={item.Poster}
+                          alt={item.Title}
+                          title={item.Title}
+                        />{' '}
+                      </figure>
+                    ) : (
+                      <figure>
+                        <img
+                          src="https://via.placeholder.com/300x400.png?text=react+omdb"
+                          alt={item.Title}
+                          title={item.Title}
+                        />
                       </figure>
                     )}
                     {item.Title}
@@ -172,18 +197,25 @@ const SearchBox = ({ onSearchItemClick }) => {
             </ul>
           </section>
         )}
+        <section className={classes['form-control__input__feedback']}>
+          {state.value.trim().length > 0 && state.value.trim().length < 3 && (
+            <p className={classes.warning}>
+              Please enter at least 3 characters to start searching ...
+            </p>
+          )}
 
-        {state.error && (
-          <p className={classes.error}>
-            Something went wrong. Please try again.
-          </p>
-        )}
+          {state.error && (
+            <p className={classes.error}>
+              Something went wrong: {state.error.message}
+            </p>
+          )}
 
-        {state.notFound && (
-          <p className={classes.error}>
-            No results found. Please try another keyword.
-          </p>
-        )}
+          {state.notFound && (
+            <p className={classes.error}>
+              No results found. Please try another keyword.
+            </p>
+          )}
+        </section>
       </form>
     </>
   );

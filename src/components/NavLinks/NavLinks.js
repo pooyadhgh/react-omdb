@@ -20,7 +20,7 @@ const NavLinks = () => {
       >
         <li>
           <a
-            href="https://github.com/pooyadhgh/React-Redux-OMDB"
+            href="https://github.com/pooyadhgh/React-OMDB"
             target="_blank"
             rel="noopener noreferrer"
           >

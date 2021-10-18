@@ -20,7 +20,6 @@
   padding: 0.5rem 2rem;
   border-radius: 0.3rem;
   width: 60vw;
-  margin-right: 1rem;
   color: #495057;
   border: 1px solid #ced4da;
   box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
@@ -32,11 +31,17 @@
   box-shadow: 0 1px 2px rgb(0 0 0 / 5%), 0 0 0 0.25rem rgb(52 89 230 / 25%);
 }
 
-.form-control__input__icon {
+.form-control__input__feedback {
   position: absolute;
-  margin-top: 3rem;
-  margin-left: 0.5rem;
+  top: 8rem;
+}
+
+.form-control__input__icon {
   color: #ced4da;
+  margin-left: 0.5rem;
+  margin-top: -1.8rem;
+  position: relative;
+  z-index: 100;
 }
 
 .form-control__input__invalid {
@@ -59,6 +64,7 @@
   box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
   margin-top: 5rem;
   padding-left: 0;
+  z-index: 100;
 }
 
 .form-control__list ul {
@@ -134,7 +140,10 @@
 
 .error {
   color: #da292e;
-  margin: 0.5rem 0;
+}
+
+.warning {
+  color: #184a6d;
 }
 
 @media screen and (min-width: 768px) {
