@@ -13,13 +13,14 @@ Onlive Version: [React-OMDB](https://bit.ly/3mYGFzH)
 
 ### HTML5
 
-- Meta title and description tags are provided for on-page SEO matters.
+- Image alt and title, meta title and meta description tags are provided for on-page SEO matters.
 - Semantic html5 tags such as header, footer, main, section, figure, time and … are used in their proper places.
+- HTML5 form validation is used such as required and min-length attributes.
 
 ### CSS3
 
 - CSS modules, a great tool that React.js provides, are used to prevent class name interference.
-- The whole elements are responsive to the changes of the viewport.
+- The whole elements are responsive to the changes of the viewport and root font size.
 - All classes are in pure CSS, using complex solutions such as pseudo-selectors, transition animations and …
 - BEM methodology is used for naming classes because it makes code cleaner and easy to read and maintain.
 
@@ -37,11 +38,13 @@ Onlive Version: [React-OMDB](https://bit.ly/3mYGFzH)
 
 ### Accessibility
 
+- All elements are responsive and change if the user changes its browser's default font size.
+- Best practices are used to create the main form, label and input for keyboard-only, non-sighted users or users who disable styles.
 - The primary form input is focused when the page is rendered.
 - Keyword input has feedbacks while it is focused and proper label and placeholder to help users.
 - After typing, the results are organized to easily navigate with assistive technology, like screen readers and keyboards.
 - If a search could not be resolved, feedback (both in visual and text) is sent to the user in different situations. When the user enters a short-length keyword, the search has no results or communicating with API has issues.
-- To navigate with a screen reader, the page has a hierarchy of section headings.
+- To navigate with a screen reader, the page has a hierarchy of elements and section headings.
 - All images have alt and title tags so screen readers can easily access and read tags.
 - All selectable elements have on-focus styling, which means that they respond on the selection with keyboard.
 - All results have their own tab index, so the tab key is working correctly.
