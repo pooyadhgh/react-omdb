@@ -13,6 +13,8 @@
   font-weight: 500;
   line-height: 1.2;
   color: #212529;
+  position: absolute;
+  top: 0;
 }
 
 .form-control__input {
@@ -33,7 +35,7 @@
 
 .form-control__input__feedback {
   position: absolute;
-  top: 8rem;
+  top: 6.5rem;
 }
 
 .form-control__input__icon {
@@ -62,7 +64,7 @@
   background-color: #fff;
   width: 60vw;
   box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
-  top: 7.5rem;
+  top: 5.25rem;
   padding-left: 0;
   z-index: 100;
 }

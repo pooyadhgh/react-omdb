@@ -7,19 +7,17 @@ const SearchResult = ({ item }) => {
     <Card>
       <h2>Search result</h2>
       <section className={classes['result-info']}>
-        {item.Poster !== 'N/A' ? (
-          <figure>
-            <img src={item.Poster} alt={item.Title} title={item.Title} />
-          </figure>
-        ) : (
-          <figure>
-            <img
-              src="https://via.placeholder.com/300x400.png?text=react+omdb"
-              alt={item.Title}
-              title={item.Title}
-            />
-          </figure>
-        )}
+        <figure>
+          <img
+            src={
+              item.Poster !== 'N/A'
+                ? item.Poster
+                : `https://via.placeholder.com/300x400.png?text=${item.Title}`
+            }
+            alt={item.Title}
+            title={item.Title}
+          />
+        </figure>
 
         <section className={classes['result-info__item']}>
           <h3>{item.Title}</h3>

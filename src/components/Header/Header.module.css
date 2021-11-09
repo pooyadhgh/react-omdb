@@ -4,11 +4,11 @@
   margin-right: 1rem;
   font-size: 1rem;
   text-decoration: none;
+  padding-left: 1rem;
 }
 
 .brand a {
   color: #fff;
-  padding: 0.5rem;
 }
 
 .brand a:focus {

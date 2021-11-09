@@ -6,7 +6,7 @@ import SearchBox from './components/SearchBox/SearchBox';
 
 const App = () => {
   const [histories, setHistories] = useState([]);
-  const [selectedResult, setSelectedResult] = useState('');
+  const [selectedResult, setSelectedResult] = useState(null);
 
   // Save search result to history and show it
   const saveSearchHandler = item => {
@@ -47,7 +47,7 @@ const App = () => {
         />
       )}
 
-      {selectedResult.length !== 0 && <SearchResult item={selectedResult} />}
+      {selectedResult && <SearchResult item={selectedResult} />}
     </Layout>
   );
 };

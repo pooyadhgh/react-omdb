@@ -18,14 +18,19 @@ const initialState = {
   searchResults: [],
   notFound: false,
   loading: false,
-  error: '',
+  error: null,
   showResults: true,
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case VALUE_ONCHANGE:
-      return { ...state, showResults: true, error: '', value: action.payload };
+      return {
+        ...state,
+        showResults: true,
+        error: null,
+        value: action.payload,
+      };
     case SEARCH_REQUEST:
       return { ...state, loading: true };
     case SEARCH_SUCCESS:
@@ -33,7 +38,7 @@ const reducer = (state, action) => {
         ...state,
         notFound: false,
         loading: false,
-        error: '',
+        error: null,
         searchResults: action.payload,
       };
     case SEARCH_FAILED:
@@ -64,7 +69,7 @@ const SearchBox = ({ onSearchItemClick }) => {
   useEffect(() => {
     inputRef.current.focus();
 
-    // Call API if entered keyword is greater than 3 words
+    // Call API if entered keyword is more than 3 words
     const searchHandler = async keyword => {
       if (keyword.trim().length < 3) return;
       dispatch({ type: SEARCH_REQUEST });
@@ -113,7 +118,7 @@ const SearchBox = ({ onSearchItemClick }) => {
         className={classes['form-control']}
         onSubmit={event => event.preventDefault()}
       >
-        <label for="keyword" className={classes['form-control__label']}>
+        <label htmlFor="keyword" className={classes['form-control__label']}>
           Enter a keyword
         </label>
 
@@ -173,23 +178,17 @@ const SearchBox = ({ onSearchItemClick }) => {
                       }
                     }}
                   >
-                    {item.Poster !== 'N/A' ? (
-                      <figure>
-                        <img
-                          src={item.Poster}
-                          alt={item.Title}
-                          title={item.Title}
-                        />{' '}
-                      </figure>
-                    ) : (
-                      <figure>
-                        <img
-                          src="https://via.placeholder.com/300x400.png?text=react+omdb"
-                          alt={item.Title}
-                          title={item.Title}
-                        />
-                      </figure>
-                    )}
+                    <figure>
+                      <img
+                        src={
+                          item.Poster !== 'N/A'
+                            ? item.Poster
+                            : `https://via.placeholder.com/300x400.png?text=${item.Title}`
+                        }
+                        alt={item.Title}
+                        title={item.Title}
+                      />
+                    </figure>
                     {item.Title}
                   </li>
                 );
