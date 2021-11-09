@@ -7,7 +7,7 @@ const formatDate = date => {
   let hours = enteredDate.getHours();
   hours = hours % 12;
   hours = hours ? hours.toString().padStart(2, '0') : 12;
-  const ampm = hours >= 12 ? 'AM' : 'PM';
+  const ampm = enteredDate.getHours() < 12 ? 'AM' : 'PM';
 
   return `${year}-${month}-${day}, ${hours}:${minutes} ${ampm}`;
 };
