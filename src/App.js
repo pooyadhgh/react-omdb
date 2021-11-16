@@ -21,10 +21,12 @@ const App = () => {
   // Clear all histories
   const clearHistoryHandler = () => {
     setHistories([]);
+    setSelectedResult(null);
   };
 
   // Remove an item from search histories
   const itemDeleteHandler = id => {
+    if (histories.length === 1) setSelectedResult(null);
     const updatedHistories = histories.filter(item => item.imdbID !== id);
     setHistories(updatedHistories);
   };
